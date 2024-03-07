@@ -1,8 +1,9 @@
 from plugin.apis.IdaApi import IdaApi
 from plugin.gui.PluginGui import PluginGui
 
-import ida_kernwin
 import idaapi
+import ida_nalt
+import ida_kernwin
 
 
 class Plugin_action_handler_t(idaapi.action_handler_t):
@@ -49,6 +50,11 @@ class PluginWidget(ida_kernwin.PluginForm):
         idaapi.unregister_action("TODO_IDA_ACTION_NAME")
         hooks.unhook()
 
+    def Show(self):
+        if ida_nalt.retrieve_input_file_md5() is not None:
+            return ida_kernwin.PluginForm.Show(self, "TODO_PLUGIN_NAME", options=(ida_kernwin.PluginForm.WCLS_CLOSE_LATER | ida_kernwin.PluginForm.WOPN_RESTORE | ida_kernwin.PluginForm.WCLS_SAVE))
+        return None
+
 
 class TemplatePlugin(idaapi.plugin_t):
     # https://www.hex-rays.com/products/ida/support/sdkdoc/group___p_l_u_g_i_n__.html
@@ -82,3 +88,21 @@ class TemplatePlugin(idaapi.plugin_t):
 
 def PLUGIN_ENTRY():
     return TemplatePlugin()
+
+
+def main():
+    global TEMPLATE_WIDGET
+    try:
+        # TODO figure out why we can't reopen our form when it was closed once
+        TEMPLATE_WIDGET = PluginWidget()
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        TEMPLATE_WIDGET = PluginWidget()
+
+    TEMPLATE_WIDGET.Show()
+
+
+if __name__ == "__main__":
+    main()
+

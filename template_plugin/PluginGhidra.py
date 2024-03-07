@@ -1,3 +1,6 @@
+# TODO_PLUGIN_DESCRIPTION
+# @author TODO_AUTHOR
+# @category Python 3
 from plugin.apis.GhidraApi import GhidraApi
 from plugin.gui.PluginGui import PluginGui
 
@@ -23,4 +26,7 @@ def run():
 
     window = PluginWidget()
     window.show()
-    app.exec_()
+    app.exec()
+
+if __name__ == "__main__":
+    run()

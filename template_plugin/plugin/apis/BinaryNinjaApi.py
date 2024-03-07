@@ -39,3 +39,18 @@ class BinaryNinjaApi(ApiProxy):
     def jump_to(self, addr):
         bv = self.bv
         bv.navigate(bv.view, addr)
+
+    def Strings(self):
+        bv = self.bv
+        # TODO could be harmonized across all APIs
+        strtype_map = {
+            0: "C",
+            1: "UTF16",
+            2: "UTF32",
+            3: "UTF8"
+        }
+        reformatted_strings = []
+        for item in bv.get_strings():
+            reformatted_tuple = (item.start, strtype_map.get(item.type, "unknown"), item.value)
+            reformatted_strings.append(reformatted_tuple)
+        return reformatted_strings

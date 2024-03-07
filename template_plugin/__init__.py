@@ -47,7 +47,7 @@ if IS_BINJA_ENV:
     dock_handler.addDockWidget(
         "TODO_PLUGIN_NAME",
         PluginDockWidget.create_widget,
-        Qt.BottomDockWidgetArea,
+        Qt.RightDockWidgetArea,
         Qt.Horizontal,
         False,
     )

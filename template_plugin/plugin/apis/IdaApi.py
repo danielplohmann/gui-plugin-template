@@ -17,3 +17,17 @@ class IdaApi(ApiProxy):
 
     def jump_to(self, addr):
         idc.jumpto(addr)
+
+    def Strings(self):
+        # TODO there are some more types, add PASCAL-type strings
+        strtype_map = {
+            0: "C",
+            1: "C32",
+            2: "C16",
+            33554433: "UTF16LE"
+        }
+        reformatted_strings = []
+        for item in idautils.Strings():
+            reformatted_tuple = (item.ea, strtype_map.get(item.strtype, "unknown"), str(item))
+            reformatted_strings.append(reformatted_tuple)
+        return reformatted_strings

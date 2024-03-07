@@ -19,6 +19,8 @@ Right now the API encapsulation is in an infant state sufficient for demonstrati
 
 To install as a plugin, copy `PluginIda.py` and folder `plugin` from `template_plugin` to `idapro-x.x/plugins` and simply run from `Edit/Plugins/` or via the assigned hotkey.
 
+To run as a script, simply execute the `PluginIda.py`.
+
 ### Ghidra
 
 After installing [Ghidraton 4.0](https://github.com/mandiant/Ghidrathon/releases/tag/v4.0.0) and opening its window in Ghidra, we need to manually add our plugin directory to Python's path and then run the plugin:
@@ -30,6 +32,8 @@ After installing [Ghidraton 4.0](https://github.com/mandiant/Ghidrathon/releases
 >>> PluginGhidra.run()
 ```
 
+Alternatively, we can also use the Script Manager, if we drop `PluginGhidra.py` and the `plugin` folder into the `Extensions/Ghidraton/ghidra_scripts/` folder (e.g. on Linux found in `~/.ghidra`).
+
 ### BinaryNinja
 
 Install as a regular plugin by dropping the full `template_plugin` folder into Binary Ninja [plugins dir](https://github.com/Vector35/binaryninja-api/tree/dev/python/examples#loading-plugins), afterwards run as View/Other Docks/...
@@ -37,3 +41,8 @@ Install as a regular plugin by dropping the full `template_plugin` folder into B
 ### Cutter
 
 TBD.
+
+### Version
+
+* 2024-03-07 v1.1 -  Adapted [MalpediaFlossed](https://github.com/malpedia/malpedia-flossed/tree/main/plugins/) plugin as demonstration, added Strings() to APIs.
+* 2024-02-26 v1.0 - Initial release
